@@ -11,29 +11,24 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+The routing library for MicroMeter. The library provides a way to define various routes and handlers.
+When the routes are retrieved, the reference of the handler is also received which can be called later.
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+TODO: Include short and useful examples for package users. 
 
 ```dart
-const like = 'sample';
+// Registering the application route
+  RouteTable.register(handler: () => 'Main route is called!');
+
+  // Getting route instance based on the URI and HttpMethod.
+  final route = RouteTable.retrieve('/', HttpMethod.get);
+
+  // Calling the route handler
+  print(route.handler());
+  //output: Main route is called!
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
