@@ -19,16 +19,79 @@ When the routes are retrieved, the reference of the handler is also received whi
 
 ## Usage
 
-TODO: Include short and useful examples for package users. 
-
+When you define only a `handler`, then handler is accessed by providing default method `GET` and default path `/`.
 ```dart
-// Registering the application route
+  // Defining a handler
   RouteTable.register(handler: () => 'Main route is called!');
-
+  
   // Getting route instance based on the URI and HttpMethod.
   final route = RouteTable.retrieve('/', HttpMethod.get);
 
   // Calling the route handler
   print(route.handler());
   //output: Main route is called!
+```
+
+When you define a route with `handler` and `method`, then handler is accessed by providing `method` and default path `/`.
+```dart
+  // Registering the application route
+  RouteTable.register(method: HttpMethod.post, handler: () => 'Main route is called!');
+
+  // Getting route instance based on the URI and HttpMethod.
+  final route = RouteTable.retrieve('/', HttpMethod.post);
+
+  // Calling the route handler
+  print(route.handler());
+  //output: Main route is called!
+```
+
+When you define a route with `path`, `method` and `handler`, the route handler then retrieved as:
+```dart
+  // Registering the application route
+  RouteTable.register(
+      path: '/users',
+      method: HttpMethod.post,
+      handler: () => 'Users route is called!');
+
+  // Getting route instance based on the URI and HttpMethod.
+  final route = RouteTable.retrieve('/users', HttpMethod.post);
+
+  // Calling the route handler
+  print(route.handler());
+  //output: Users route is called!
+```
+
+Providing optional `consumes` flag to the route:
+```dart
+  // Registering the application route
+  RouteTable.register(
+      path: '/users',
+      method: HttpMethod.post,
+      handler: () => 'Users route is called!',
+      consumes: ContentType.json);
+
+  // Getting route instance based on the URI and HttpMethod.
+  final route = RouteTable.retrieve('/users', HttpMethod.post);
+
+  // Calling the route handler
+  print(route.handler());
+  //output: Users route is called!
+```
+
+Providing optional `produces` flag to the route:
+```dart
+  // Registering the application route
+  RouteTable.register(
+      path: '/users',
+      method: HttpMethod.post,
+      handler: () => 'Users route is called!',
+      consumes: ContentType.json,
+      produces: ContentType.json);
+
+  // Getting route instance based on the URI and HttpMethod.
+  final route = RouteTable.retrieve('/users', HttpMethod.post);
+
+  // Calling the route handler
+  print(route.handler());
+  //output: Users route is called!
 ```

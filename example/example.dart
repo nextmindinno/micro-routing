@@ -1,13 +1,20 @@
+import 'dart:io';
+
 import 'package:micro_routing/micro_routing.dart';
 
 void main() {
   // Registering the application route
-  RouteTable.register(handler: () => 'Main route is called!');
+  RouteTable.register(
+      path: '/users',
+      method: HttpMethod.post,
+      handler: () => 'Users route is called!',
+      consumes: ContentType.json,
+      produces: ContentType.json);
 
   // Getting route instance based on the URI and HttpMethod.
-  final route = RouteTable.retrieve('/', HttpMethod.get);
+  final route = RouteTable.retrieve('/users', HttpMethod.post);
 
   // Calling the route handler
   print(route.handler());
-  //output: Main route is called!
+  //output: Users route is called!
 }
